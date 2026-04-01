@@ -28,6 +28,7 @@ test('Assert manager can add new customer', async ({ page }) => {
   await customersPage.assertFirstTableRowContainsText(firstName)
   await customersPage.assertFirstTableRowContainsText(lastName)
   await customersPage.assertFirstTableRowContainsText(postCode);
+  await customersPage.assertLastRowAccountNumberIsEmpty();
 
   /* 
   Test:

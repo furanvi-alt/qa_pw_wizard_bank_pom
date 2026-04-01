@@ -1,13 +1,8 @@
 import { test } from '@playwright/test';
-import { faker } from '@faker-js/faker';
-import { BankHomePage } from '../../../src/pages/BankHomePage';
-import { BankManagerMainPage } from '../../../src/pages/manager/BankManagerMainPage';
 import { OpenAccountPage } from '../../../src/pages/manager/OpenAccountPage';
 
 test('Assert manager can choose currencies for account', async ({ page }) => {
   const openAccountPage = new OpenAccountPage(page);
-  const bankHomePage = new BankHomePage(page);
-  const managerPage = new BankManagerMainPage(page);
 
   await openAccountPage.open();
   await openAccountPage.selectCurrency('Dollar');

@@ -1,7 +1,5 @@
 import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { BankHomePage } from '../../../src/pages/BankHomePage';
-import { BankManagerMainPage } from '../../../src/pages/manager/BankManagerMainPage';
 import { AddCustomerPage } from '../../../src/pages/manager/AddCustomerPage';
 import { CustomersListPage } from '../../../src/pages/manager/CustomersListPage'; 
 import { OpenAccountPage } from '../../../src/pages/manager/OpenAccountPage';
@@ -24,20 +22,17 @@ test.beforeEach(async ({ page }) => {
   await addCustomerPage.clickAddCustomerButton();
 });
 
-test('Assert manager can add new customer', async ({ page }) => {
+test('Assert manager can open account', async ({ page }) => {
   const openAccountPage = new OpenAccountPage(page);
   const customersPage = new CustomersListPage(page);
-  const bankHomePage = new BankHomePage(page);
-  const managerPage = new BankManagerMainPage(page);
   await openAccountPage.open();
   await openAccountPage.selectCustomer(`${firstName} ${lastName}`)
   await openAccountPage.selectCurrency('Dollar')
   await openAccountPage.clickProcessButton()
   await page.reload();
-  await managerPage.clickCustomersButton();
+  await customersPage.open();
   await customersPage.assertFirstTableRowContainsText(firstName);
-  await customersPage.assertFirstTableRowContainsText(lastName);
-  await customersPage.assertFirstTableRowContainsText(postCode);
+await customersPage.assertLastRowAccountNumberIsNotEmpty();
   /* 
   Test:
   1. Click [Open Account].

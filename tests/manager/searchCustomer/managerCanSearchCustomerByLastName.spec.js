@@ -29,5 +29,6 @@ test('Assert manager can search customer by Last Name', async ({ page }) => {
   await customersListPage.open();
   await customersListPage.fillSearchCustomerInput(lastName);
   await customersListPage.assertFirstTableRowContainsText(lastName);
+  await customersListPage.assertOnlyOneRowIsVisible();
  
 });
